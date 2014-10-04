@@ -1,11 +1,11 @@
 public class PQItem implements Comparable<PQItem> {
 	
 	String value;
-	int arrayIndex; //the index of the array containing this element
+	int fileIndex; //the index of the array containing this element
 	
 	public PQItem(String val, int arrayIndex){
 		this.value = val;
-		this.arrayIndex = arrayIndex;
+		this.fileIndex = arrayIndex;
 	}
 	/**
 	 * compares two PQItems

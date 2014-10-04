@@ -82,14 +82,14 @@ public class PriorityQTest {
         // reassign arrayIndexes
         for (int i = 0; i < mixMatch1.length; i++) {
             for (int j = 0; j < mixMatch1[i].length; j++) {
-                mixMatch1[i][j].arrayIndex = i;
+                mixMatch1[i][j].fileIndex = i;
             }
         }
         PQItem[][] mixMatch2 = { arrays[0][4], arrays[1][2],
                 arrays[2][1], arrays[3][0] };
         for (int i = 0; i < mixMatch2.length; i++) {
             for (int j = 0; j < mixMatch2[i].length; j++) {
-                mixMatch2[i][j].arrayIndex = i;
+                mixMatch2[i][j].fileIndex = i;
             }
         }
         // check the mix and match arrays
