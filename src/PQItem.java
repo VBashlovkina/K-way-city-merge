@@ -15,7 +15,7 @@ public class PQItem implements Comparable<PQItem> {
 	}
 	
 	public String toString(){
-		return this.value;
+		return this.value + "," + this.fileIndex;
 	}
 
 }

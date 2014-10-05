@@ -204,7 +204,7 @@ public class PriorityQ extends PQ {
 	    output[currentOutput] = pq.remove();
 	    // get another element from the array the smallest item came from
 	    // and put that in the heap
-	    arrayFrom = output[currentOutput++].arrayIndex;
+	    arrayFrom = output[currentOutput++].fileIndex;
 
 	    // if there are elements left in the array the removed element was
 	    // from
@@ -226,105 +226,10 @@ public class PriorityQ extends PQ {
 	return output;
     }
 
-    /*
-     * http://www.cs.grinnell.edu/~walker/courses/207.fa14/readings/reading-input
-     * .shtml for reading input
-     * http://docs.oracle.com/javase/7/docs/api/java/io/BufferedReader.html
-     * return type of readLine()
-     * http://stackoverflow.com/questions/14443662/printwriter-add-text-to-file
-     * use PrintWriter to write to file
-     */
+    
 
-    @SuppressWarnings("resource")
-    public static void mergeCities(String[] inputFileNames,
-	    String outputFileName) throws IOException {
-
-	/**
-	 * TODO: rename PriorityQ, make it Heap?
-	 */
-	int len = inputFileNames.length;// number of files to merge
-	PriorityQ heap = new PriorityQ(len);
-	int fromWhichFile;
-
-	// Initialize input streams and readers to each of the input files
-	FileReader[] istreams = new FileReader[len];
-	BufferedReader[] files = new BufferedReader[len];
-	for (int i = 0; i < len; i++) {
-	    istreams[i] = new FileReader(inputFileNames[i]);
-	    files[i] = new BufferedReader(istreams[i]);
-	}
-
-	// Initialize the output writer
-	PrintWriter pen = new PrintWriter(new FileWriter(outputFileName, true));
-
-	PQItem toInsert;
-	PQItem removed;
-	// Insert the first elements into the heap
-	for (int i = 0; i < len; i++) {
-	    toInsert = new PQItem(files[i].readLine(), i);
-	    heap.insert(toInsert);
-	}
-
-	while (!heap.isEmpty()) {
-	    // the first element in that heap is the smallest out of all of them
-	    // print it to the output file
-	    removed = heap.remove();
-	    fromWhichFile = removed.fileIndex;
-	    pen.println(removed.value);
-	    // get another element from the array the smallest item came from
-	    // and put that in the heap
-	    // if there are elements left in the array the removed element was
-	    // from
-	    try {
-		// Get the next line of the file whose element was just removed
-		toInsert = new PQItem(files[fromWhichFile].readLine(),
-			fromWhichFile);
-		heap.insert(toInsert);
-	    } // try
-	    catch (Exception e) {
-		for (int i = 0; i < len; i++) {
-
-		    try {
-			toInsert = new PQItem(files[i].readLine(), i);
-			heap.insert(toInsert);
-		    }// try
-		    catch (Exception f) {
-			break;
-		    }// catch f
-		}// for
-	    }// catch e
-
-	} // while
-
-    }// 
-
+   
     public static void main(String[] args) {
 
-	// Experiment with the heap
-	String[] contents = { "Blue", "Red", "green" };
-	PriorityQ pq = new PriorityQ(7);
-	int i = 0;
-	while (!pq.isFull()) {
-	    System.out.println("inserted: " + contents[i]);
-	    pq.insert(new PQItem(contents[i++], 3));
-	}
-	System.out.println(Arrays.toString(pq.heapArray));
-	while (!pq.isEmpty()) {
-	    System.out.println("top: " + pq.top().toString());
-	    System.out.println("removed: " + pq.remove().toString());
-	}
-
-	// Experiment with K-way merge of a 2d array
-	int rows = 9;
-	int cols = 7;
-	PQItem[][] test = new PQItem[rows][cols];
-	for (int k = 0; k < rows; k++) {
-	    for (int j = 0; j < cols; j++) {
-		test[k][j] = new PQItem(k + "", k);
-	    }
-	}
-
-	System.out.println(Arrays.toString(kWayMerge(test)));
-
-    }
-}
+    }// main
+}// class PriorityQ
