@@ -199,11 +199,13 @@ public class MergeCityNames {
 		"missouri", "nebraska", "north-dakota", "south-dakota",
 		"wisconsin" };
 	int len = possibleStates.length;
+	String[] possibleFileNames = new String[len];
 	for (int i = 0; i < len; i++)
-	    possibleStates[i] = possibleStates[i] + ".cities";
+	    possibleFileNames[i] = "/home/walker/public_html/courses/301.fa14/states-cities/"
+		    + possibleStates[i] + ".cities";
 
 	// If there were arguments,
-	String[] requestedStates = possibleStates;
+	String[] requestedStates = possibleFileNames;
 	int argLen = args.length;
 	if (argLen > len)
 	    throw new Exception("The expected number of arguments "
@@ -211,20 +213,24 @@ public class MergeCityNames {
 	if (args.length > 0) {
 	    requestedStates = new String[args.length];
 	    for (int i = 0; i < args.length; i++) {
-		requestedStates[i] = possibleStates[new Integer(args[i])];
+		requestedStates[i] = possibleFileNames[new Integer(args[i])];
 	    }
 	}
 
 	System.out.println("Merging the following files:\n"
-		+ Arrays.toString(requestedStates));	
+		+ Arrays.toString(requestedStates));
 	mergeCities(requestedStates, "merged.cities");
-	System.out.println("The merged file \"merged.cities\" " +
-		"is now in the project directory.");
+	System.out.println("The merged file \"merged.cities\" "
+		+ "is now in the project directory.");
 
 	System.out
 		.println("Does the merged file contatin the right number of lines? "
 			+ isRightLength(requestedStates, "merged.cities"));
 	// System.out.println(isSorted("merged.cities"));// false
-	// System.out.println(isSorted("illinois.cities"));// false
+	for (int i = 1; i < len; i++) {
+	    System.out.println("\tIs " + possibleStates[i] + " sorted?");
+	    System.out.println(isSorted(possibleFileNames[i]));
+	}
+	System.out.println(isSorted("iowa.cities"));// false
     }// main
 }// class MergeCityNames
